@@ -1,0 +1,17 @@
+---
+title: "Jed Alan Cooper"
+image: "IMG_3650.jpg"
+links:
+  - label: LinkedIn
+    url: "https://linkedin.com/in/jed-alan-cooper-86379a264"
+  - label: GitHub
+    url: "https://github.com/JedCooper20"
+  - label: Email
+    url: "jed.cooper07@gmail.com"
+output:
+  postcards::jolla
+---
+ 
+I am a 3rd Year International Relations student studying at the University of Essex. 
+I recently completed a year placement within Infrastructure Asset Management. I enjoy talking about football and 
+Motorsport.
