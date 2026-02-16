@@ -1,5 +1,5 @@
 ---
-title: "Jed Alan Cooper"
+title: "Jed Cooper"
 image: "IMG_3650.jpg"
 links:
   - label: LinkedIn
@@ -7,7 +7,7 @@ links:
   - label: GitHub
     url: "https://github.com/JedCooper20"
   - label: Email
-    url: "jed.cooper07@JEDS-LAPTOP"
+    url: "jed.cooper07@jed.cooper07@gmail.com"
 output:
   postcards::jolla
 ---
