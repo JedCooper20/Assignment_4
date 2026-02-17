@@ -1,0 +1,121 @@
+---
+title: "gv300-Showcase"
+author: "Jed Cooper"
+date: "2026-02-17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{R}
+#install.packages(c("stringr", "readr", "ggplot2"))
+#install.packages("curl")
+#install.packages("tidyverse")
+
+library(stringr)
+library(readr)
+library(ggplot2)
+library(curl)
+library(tidyverse)
+
+#2024 UK General Election — candidate-level CSV (has electorate & valid votes)
+#Linked from the official 2024 results page (“Download the full data set”).
+
+uk_csv <- "https://electionresults.parliament.uk/general-elections/6/candidacies.csv"
+uk_raw <- readr::read_csv(uk_csv, show_col_types = FALSE)
+names(uk_raw) <- names(uk_raw) %>% tolower() %>% str_replace_all("\\s+", "_")
+
+# Creates a variable called uk_csv and gives it a URL link 
+# Loading the CSV file directly from the internet into R, creating a dataset named it uk_raw
+# Making the _ easier to read 
+
+# Step 1 # Filtering the data to get into the election data
+```{r}
+uk1 <- uk_raw %>%
+  filter(!`election_is_by-election`)
+```
+
+#Puting data into bins
+
+```{R}
+
+uk2 <- uk1 %>%
+  select(
+    constituency = constituency_name,
+    country      = country_name,
+    valid_votes  = candidate_vote_count,
+    electorate   = electorate
+  )
+```
+
+# Step 3 — Groups rows together, summarising the results from candidate-level to constituency-level.
+
+```{R}
+uk3 <- uk2 %>%
+  group_by(country, constituency) %>%
+  summarise(
+    valid_votes = sum(valid_votes, na.rm = TRUE),
+    electorate  = max(electorate, na.rm = TRUE),  # same value repeated, so take max
+    .groups = "drop"
+  )
+```
+
+
+```{r}
+#  Step 4 — Calculating turnout percentages
+
+uk <- uk3 %>%
+  mutate(turnout_registered = 100 * valid_votes / electorate) %>%
+  filter(is.finite(turnout_registered), electorate > 0)
+
+#  Turning it into glimpse gives the data set out quick and clear
+
+glimpse(uk)
+```
+
+
+
+# Step 6 — Shows top and bottom 10 by turnout registered percentage
+
+```{R}
+top10 <- uk %>% arrange(desc(turnout_registered)) %>% slice_head(n = 10)
+bottom10 <- uk %>% arrange(turnout_registered) %>% slice_head(n = 10)
+
+top10
+bottom10
+```
+
+# Step 7: Turnout by Constituent Countries of the UK
+
+# 1) Country summary (mean, median, n), ordered by mean turnout
+
+```{r}
+turnout_by_country <- uk %>%
+  group_by(country) %>%
+  summarise(
+    mean_turnout   = mean(turnout_registered, na.rm = TRUE),
+    median_turnout = median(turnout_registered, na.rm = TRUE),
+    n              = n(),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(mean_turnout))
+
+turnout_by_country
+```
+
+#Data Visualisation 
+
+```{r}
+ggplot(turnout_by_country, aes(country, mean_turnout)) +
+  geom_col(width = 0.7, fill = "#0072B2") +  # bar = mean turnout
+  scale_y_continuous(limits = c(0, 100),
+                     expand = expansion(mult = c(0, 0.05))) +
+  labs(
+    title = "UK 2024 General Election: Mean Turnout by Country",
+    x = "Country",
+    y = "Turnout (% of registered voters)"
+  ) +
+  theme_classic()
+```
