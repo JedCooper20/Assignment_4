@@ -1,0 +1,216 @@
+---
+title: "Examples of Work"
+author: "Jed Cooper"
+date: "2026-02-16"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this example i have ...
+
+#Setup
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.width = 8,
+  fig.height = 5
+)
+library(tidyverse)
+library(ggplot2)
+library(patchwork)
+
+colorize <- function(x, color) {
+  if (knitr::is_latex_output()) {
+    sprintf("\\textcolor{%s}{%s}", color, x)
+  } else if (knitr::is_html_output()) {
+    sprintf("<span style='color: %s;'>%s</span>", color,
+      x)
+  } else x
+}
+
+```
+
+```{r first, eval=TRUE}
+# uk <- read_csv("uk_election_data.csv")
+uk_csv <- "https://electionresults.parliament.uk/general-elections/6/candidacies.csv"
+uk_raw <- readr::read_csv(uk_csv, show_col_types = FALSE)
+names(uk_raw) <- names(uk_raw) %>% tolower() %>% str_replace_all("\\s+", "_")
+```
+
+
+```{r cleaning, eval=TRUE}
+# Clean the data
+uk1 <- uk_raw %>%
+  filter(!`election_is_by-election`)
+
+uk2 <- uk1 %>%
+  select(
+    constituency = constituency_name,
+    country      = country_name,
+    valid_votes  = candidate_vote_count,
+    electorate   = electorate
+  )
+
+uk3 <- uk2 %>%
+  group_by(country, constituency) %>%
+  summarise(
+    valid_votes = sum(valid_votes, na.rm = TRUE),
+    electorate  = max(electorate, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+uk <- uk3 %>%
+  mutate(turnout_registered = 100 * valid_votes / electorate) %>%
+  filter(is.finite(turnout_registered), electorate > 0)
+
+# Quick check of the data
+glimpse(uk)
+```
+
+uk1 - Remove by elections - This step filters out any rows where the election was a by-election.
+This step filters out any rows where the election was a by-election.
+This ensures that our analysis focuses solely on nationwide general election turnout, not special local elections that could distort the results.
+
+uk2 - Selects relevant variables and names them. We only keep the four useful collumns.
+ - Counstituency 
+ - country 
+ - valid_votes
+ - electorate
+
+uk3 - Aggregate to the constituency level 
+Each constituency appears multiple times (once per candidate).
+This step groups by country and constituency and then:
+ - sums all candidates’ votes to get total valid votes cast
+ - takes the maximum electorate value (they are identical for all candidates)
+The result is one row per constituency with correct totals.
+
+uk4 - Calculate turnout and remove invalid rows
+This step:
+computes turnout as a percentage using
+turnout_registered = 100 * valid_votes / electorate
+removes rows where turnout is not a real number (e.g., missing or infinite values)
+removes rows with electorate ≤ 0
+This gives a clean data set with one row per constituency and a valid turnout measure.
+
+## Question 1: Finding Inequality
+
+First of all, I find the 5 smallest constituencies in the UK
+
+```{r small, eval=TRUE}
+smallest <- uk %>% 
+  arrange(valid_votes) %>% 
+  slice_head(n = 5) %>%
+  select(constituency, country, valid_votes, turnout_registered)
+smallest
+```
+
+Next, find the 5 largest constituencies in the UK
+
+```{r largest, eval=TRUE}
+largest <- uk %>%
+  arrange(desc(electorate)) %>%   # sort from largest to smallest electorate
+  slice_head(n = 5) %>%
+  select(constituency, country, valid_votes, turnout_registered)
+
+largest
+```
+
+Now that we have the smallest and the largest, I calculate the ratio between largest and smallest
+
+```{r ratio, eval=TRUE}
+biggest_value <- max(uk$valid_votes, na.rm = TRUE)       # largest value
+smallest_value <- min(uk$valid_votes, na.rm = TRUE)      # smallest value
+
+ratio <- biggest_value / smallest_value
+ratio
+
+```
+
+The ratio tells us how many times larger the biggest constituency is compared to the smallest.
+To find out the answer, we print the variable ratio. The code used is:
+```{r biggest_smallest}
+biggest_value <- max(uk$valid_votes, na.rm = TRUE)
+smallest_value <- min(uk$valid_votes, na.rm = TRUE)
+ratio <- biggest_value / smallest_value
+
+ratio
+```
+
+And the answer is 4.26848
+
+`r colorize("Question:", "red")` What is the range of constituency size? What about the variance? How might you have a look at this or calculate it? Is the fact that constituencies vary so much in terms of numbers of voters fair? Why or why not? 
+```{r range}
+range_electorate <- range(uk$electorate, na.rm = TRUE)
+range_electorate
+```
+Range = 21325 - 85204
+```{r variance}
+var_electorate <- var(uk$electorate, na.rm = TRUE)
+var_electorate
+```
+```{r Variance_graph}
+ggplot(uk, aes(electorate)) +
+  geom_histogram(bins = 30) +
+  labs(title = "Distribution of Constituency Electorate")
+```
+Variance = 18541899 + data shown from the graph
+
+Constituencies ideally should be roughly equal in size so that each person’s vote carries similar weight. When constituency sizes vary widely, voters in smaller constituencies have proportionally more influence than voters in large ones. This creates an imbalance in political representation. Large variation therefore raises issues of fairness, because it violates the democratic principle of “one person, one vote.”
+On the other hand, some variation is unavoidable due to geography, population density, and community boundaries. But when the differences are very large, it can be considered unfair or undemocratic.
+
+The first thing that we could do is calculate the overall mean for the reference line.
+
+```{r plot1, eval=TRUE}
+overall_mean <- mean(uk$valid_votes)
+
+ggplot(uk, aes(x = valid_votes)) +
+  geom_histogram(bins = 30, fill = "steelblue", alpha = 0.7) +
+  geom_vline(xintercept = overall_mean, 
+             color = "red", linetype = "dashed", linewidth = 1) +
+  facet_wrap(~ country, ncol = 2) +
+  labs(
+    title = "Distribution of Constituency Sizes by Country",
+    subtitle = "Red line shows overall UK mean",
+    x = "Number of Valid Votes",
+    y = "Count of Constituencies"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    strip.text = element_text(face = "bold")
+  )
+
+```
+
+
+
+```{r constituency_variation2, eval=TRUE}
+# Improved plot: Boxplot + points + mean line
+uk %>%
+  group_by(country) %>%
+  mutate(mean_votes_country = mean(valid_votes)) %>%
+  ggplot(aes(x = country, y = valid_votes, fill = country)) +
+  geom_boxplot(alpha = 0.5, outlier.shape = NA) +   # Boxplot without extreme outliers
+  geom_jitter(width = 0.2, alpha = 0.6, size = 1.5) + # Add points for each constituency
+  geom_hline(aes(yintercept = mean_votes_country), linetype = "dashed", color = "red") + # Mean line
+  labs(
+    title = "Variation in Constituency Sizes by Country",
+    subtitle = "Red dashed line shows country mean; points show individual constituencies",
+    x = "Country",
+    y = "Number of Valid Votes",
+    fill = "Country"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11),
+    legend.position = "none"
+  )
+
+```
