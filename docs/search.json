@@ -1,0 +1,28 @@
+{
+  "articles": [
+    {
+      "path": "about.html",
+      "title": "About this site",
+      "description": "Some additional details about the website",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\n",
+      "last_modified": "2026-02-17T00:49:08+00:00"
+    },
+    {
+      "path": "index.html",
+      "title": "mfeo",
+      "description": "Welcome to the website. I hope you enjoy it!\n",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\n",
+      "last_modified": "2026-02-16T17:19:41+00:00"
+    },
+    {
+      "path": "tobi.html",
+      "title": "Jed Cooper",
+      "author": [],
+      "contents": "\r\n\r\n          \r\n          \r\n          mfeo\r\n          \r\n          \r\n          Home\r\n          About\r\n          ☰\r\n          \r\n          \r\n      \r\n        \r\n          \r\n            Jed Cooper\r\n          \r\n          \r\n            \r\n              I am a 3rd Year International Relations student\r\n              studying at the University of Essex. I recently completed\r\n              a year placement within Infrastructure Asset Management. I\r\n              enjoy talking about football and Motorsport.\r\n            \r\n            \r\n              I am a 3rd Year International Relations student\r\n              studying at the University of Essex. I recently completed\r\n              a year placement within Infrastructure Asset Management. I\r\n              enjoy talking about football and Motorsport.\r\n            \r\n          \r\n\r\n          \r\n            \r\n              \r\n                  \r\n                    \r\n                      LinkedIn\r\n                    \r\n                  \r\n                \r\n                                \r\n                  \r\n                    \r\n                      GitHub\r\n                    \r\n                  \r\n                \r\n                                \r\n                  \r\n                    \r\n                      Email\r\n                    \r\n                  \r\n                \r\n                              \r\n          \r\n\r\n          \r\n            \r\n              \r\n                                \r\n                  \r\n                    LinkedIn\r\n                  \r\n                \r\n                                \r\n                  \r\n                    GitHub\r\n                  \r\n                \r\n                                \r\n                  \r\n                    Email\r\n                  \r\n                \r\n                              \r\n            \r\n          \r\n        \r\n      \r\n    \r\n\r\n    \r\n    \r\n    ",
+      "last_modified": "2026-02-17T00:49:08+00:00"
+    }
+  ],
+  "collections": ["posts/posts.json"]
+}
