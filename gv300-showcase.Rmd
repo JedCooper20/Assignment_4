@@ -38,6 +38,7 @@ uk1 <- uk_raw %>%
 ```
 
 #Puting data into bins
+#Putting date into bins
 
 ```{R}
 
