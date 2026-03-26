@@ -1,13 +1,7 @@
 ---
 title: "Examples of Work"
-author: "Jed Cooper"
-date: "2026-02-16"
-output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 In this example i have ...
 
@@ -23,7 +17,7 @@ knitr::opts_chunk$set(
 )
 library(tidyverse)
 library(ggplot2)
-library(patchwork)
+
 
 colorize <- function(x, color) {
   if (knitr::is_latex_output()) {

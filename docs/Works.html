@@ -88,26 +88,26 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>mfeo: gv300-Showcase</title>
+  <title>mfeo: Examples of Work</title>
 
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="mfeo: gv300-Showcase"/>
+  <meta property="og:title" content="mfeo: Examples of Work"/>
   <meta property="og:type" content="article"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="mfeo"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="mfeo: gv300-Showcase"/>
+  <meta property="twitter:title" content="mfeo: Examples of Work"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title"]}},"value":[{"type":"character","attributes":{},"value":["gv300-Showcase"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title"]}},"value":[{"type":"character","attributes":{},"value":["Examples of Work"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2116,7 +2116,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"gv300-Showcase","authors":[]}
+{"title":"Examples of Work","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2140,7 +2140,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>gv300-Showcase</h1>
+<h1>Examples of Work</h1>
 
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
@@ -2149,73 +2149,43 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
 <div class="d-article">
+<p>In this example i have …</p>
+<p>#Setup</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#install.packages(c("stringr", "readr", "ggplot2"))</span></span>
-<span><span class='co'>#install.packages("curl")</span></span>
-<span><span class='co'>#install.packages("tidyverse")</span></span>
-<span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://stringr.tidyverse.org'>stringr</a></span><span class='op'>)</span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://jeroen.r-universe.dev/curl'>curl</a></span><span class='op'>)</span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
-<span></span>
-<span><span class='co'>#2024 UK General Election — candidate-level CSV (has electorate &amp; valid votes)</span></span>
-<span><span class='co'>#Linked from the official 2024 results page (“Download the full data set”).</span></span>
-<span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># uk &lt;- read_csv("uk_election_data.csv")</span></span>
 <span><span class='va'>uk_csv</span> <span class='op'>&lt;-</span> <span class='st'>"https://electionresults.parliament.uk/general-elections/6/candidacies.csv"</span></span>
 <span><span class='va'>uk_raw</span> <span class='op'>&lt;-</span> <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='va'>uk_csv</span>, show_col_types <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
-<span><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>uk_raw</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>uk_raw</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_replace.html'>str_replace_all</a></span><span class='op'>(</span><span class='st'>"\\s+"</span>, <span class='st'>"_"</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='co'># Creates a variable called uk_csv and gives it a URL link </span></span>
-<span><span class='co'># Loading the CSV file directly from the internet into R, creating a dataset named it uk_raw</span></span>
-<span><span class='co'># Making the _ easier to read </span></span>
-<span></span>
-<span><span class='co'># Step 1 # Filtering the data to get into the election data</span></span></code></pre>
+<span><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>uk_raw</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>uk_raw</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_replace.html'>str_replace_all</a></span><span class='op'>(</span><span class='st'>"\\s+"</span>, <span class='st'>"_"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>uk1</span> <span class='op'>&lt;-</span> <span class='va'>uk_raw</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='va'>`election_is_by-election`</span><span class='op'>)</span></span></code></pre>
-</div>
-</div>
-<p>#Puting data into bins
-#Putting date into bins</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>uk2</span> <span class='op'>&lt;-</span> <span class='va'>uk1</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Clean the data</span></span>
+<span><span class='va'>uk1</span> <span class='op'>&lt;-</span> <span class='va'>uk_raw</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='va'>`election_is_by-election`</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>uk2</span> <span class='op'>&lt;-</span> <span class='va'>uk1</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span></span>
 <span>    constituency <span class='op'>=</span> <span class='va'>constituency_name</span>,</span>
 <span>    country      <span class='op'>=</span> <span class='va'>country_name</span>,</span>
 <span>    valid_votes  <span class='op'>=</span> <span class='va'>candidate_vote_count</span>,</span>
 <span>    electorate   <span class='op'>=</span> <span class='va'>electorate</span></span>
-<span>  <span class='op'>)</span></span></code></pre>
-</div>
-</div>
-<h1 id="step-3-groups-rows-together-summarising-the-results-from-candidate-level-to-constituency-level.">Step 3 — Groups rows together, summarising the results from candidate-level to constituency-level.</h1>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>uk3</span> <span class='op'>&lt;-</span> <span class='va'>uk2</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>uk3</span> <span class='op'>&lt;-</span> <span class='va'>uk2</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>country</span>, <span class='va'>constituency</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span></span>
 <span>    valid_votes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>valid_votes</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,</span>
-<span>    electorate  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>electorate</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,  <span class='co'># same value repeated, so take max</span></span>
+<span>    electorate  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>electorate</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,</span>
 <span>    .groups <span class='op'>=</span> <span class='st'>"drop"</span></span>
-<span>  <span class='op'>)</span></span></code></pre>
-</div>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#  Step 4 — Calculating turnout percentages</span></span>
+<span>  <span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>uk</span> <span class='op'>&lt;-</span> <span class='va'>uk3</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>turnout_registered <span class='op'>=</span> <span class='fl'>100</span> <span class='op'>*</span> <span class='va'>valid_votes</span> <span class='op'>/</span> <span class='va'>electorate</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/is.finite.html'>is.finite</a></span><span class='op'>(</span><span class='va'>turnout_registered</span><span class='op'>)</span>, <span class='va'>electorate</span> <span class='op'>&gt;</span> <span class='fl'>0</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='co'>#  Turning it into glimpse gives the data set out quick and clear</span></span>
-<span></span>
+<span><span class='co'># Quick check of the data</span></span>
 <span><span class='fu'><a href='https://pillar.r-lib.org/reference/glimpse.html'>glimpse</a></span><span class='op'>(</span><span class='va'>uk</span><span class='op'>)</span></span></code></pre>
 </div>
 <pre><code>Rows: 650
@@ -2226,85 +2196,167 @@ $ valid_votes        &lt;dbl&gt; 48544, 40912, 51452, 42531, 54740, 39882,…
 $ electorate         &lt;dbl&gt; 78553, 70268, 74025, 71546, 77969, 68929,…
 $ turnout_registered &lt;dbl&gt; 61.79777, 58.22280, 69.50625, 59.44567, 7…</code></pre>
 </div>
-<h1 id="step-6-shows-top-and-bottom-10-by-turnout-registered-percentage">Step 6 — Shows top and bottom 10 by turnout registered percentage</h1>
+<p>uk1 - Remove by elections - This step filters out any rows where the election was a by-election.
+This step filters out any rows where the election was a by-election.
+This ensures that our analysis focuses solely on nationwide general election turnout, not special local elections that could distort the results.</p>
+<p>uk2 - Selects relevant variables and names them. We only keep the four useful collumns.
+- Counstituency
+- country
+- valid_votes
+- electorate</p>
+<p>uk3 - Aggregate to the constituency level
+Each constituency appears multiple times (once per candidate).
+This step groups by country and constituency and then:
+- sums all candidates’ votes to get total valid votes cast
+- takes the maximum electorate value (they are identical for all candidates)
+The result is one row per constituency with correct totals.</p>
+<p>uk4 - Calculate turnout and remove invalid rows
+This step:
+computes turnout as a percentage using
+turnout_registered = 100 * valid_votes / electorate
+removes rows where turnout is not a real number (e.g., missing or infinite values)
+removes rows with electorate ≤ 0
+This gives a clean data set with one row per constituency and a valid turnout measure.</p>
+<h2 id="question-1-finding-inequality">Question 1: Finding Inequality</h2>
+<p>First of all, I find the 5 smallest constituencies in the UK</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>top10</span> <span class='op'>&lt;-</span> <span class='va'>uk</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>turnout_registered</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_head</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></span>
-<span><span class='va'>bottom10</span> <span class='op'>&lt;-</span> <span class='va'>uk</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='va'>turnout_registered</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_head</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>smallest</span> <span class='op'>&lt;-</span> <span class='va'>uk</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='va'>valid_votes</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_head</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>constituency</span>, <span class='va'>country</span>, <span class='va'>valid_votes</span>, <span class='va'>turnout_registered</span><span class='op'>)</span></span>
+<span><span class='va'>smallest</span></span></code></pre>
+</div>
+<pre><code># A tibble: 5 × 4
+  constituency              country  valid_votes turnout_registered
+  &lt;chr&gt;                     &lt;chr&gt;          &lt;dbl&gt;              &lt;dbl&gt;
+1 Na h-Eileanan an Iar      Scotland       13528               63.4
+2 Orkney and Shetland       Scotland       20688               60.4
+3 Manchester Rusholme       England        29033               40.0
+4 Kingston upon Hull East   England        29816               42.2
+5 Blaenau Gwent and Rhymney Wales          29922               42.7</code></pre>
+</div>
+<p>Next, find the 5 largest constituencies in the UK</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>largest</span> <span class='op'>&lt;-</span> <span class='va'>uk</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>electorate</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>   <span class='co'># sort from largest to smallest electorate</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_head</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>constituency</span>, <span class='va'>country</span>, <span class='va'>valid_votes</span>, <span class='va'>turnout_registered</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='va'>top10</span></span></code></pre>
+<span><span class='va'>largest</span></span></code></pre>
 </div>
-<pre><code># A tibble: 10 × 5
-   country constituency      valid_votes electorate turnout_registered
-   &lt;chr&gt;   &lt;chr&gt;                   &lt;dbl&gt;      &lt;dbl&gt;              &lt;dbl&gt;
- 1 England Harpenden and Be…       54336      72242               75.2
- 2 England Rushcliffe              57744      79160               72.9
- 3 England Winchester              57076      78289               72.9
- 4 England Esher and Walton        53880      74042               72.8
- 5 England Chesham and Amer…       54455      74889               72.7
- 6 England South Cotswolds         52287      71971               72.7
- 7 England North Somerset          53766      74426               72.2
- 8 England North East Hamps…       55560      76923               72.2
- 9 England Godalming and Ash       54696      75816               72.1
-10 England Henley and Thame        53157      73749               72.1</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>bottom10</span></span></code></pre>
+<pre><code># A tibble: 5 × 4
+  constituency         country          valid_votes turnout_registered
+  &lt;chr&gt;                &lt;chr&gt;                  &lt;dbl&gt;              &lt;dbl&gt;
+1 Manchester Central   England                39725               46.6
+2 Poplar and Limehouse England                43051               51.2
+3 Birmingham Ladywood  England                36579               43.7
+4 Salford              England                39704               47.5
+5 Lagan Valley         Northern Ireland       49081               59.7</code></pre>
 </div>
-<pre><code># A tibble: 10 × 5
-   country constituency      valid_votes electorate turnout_registered
-   &lt;chr&gt;   &lt;chr&gt;                   &lt;dbl&gt;      &lt;dbl&gt;              &lt;dbl&gt;
- 1 England Manchester Rusho…       29033      72608               40.0
- 2 England Leeds South             31678      75953               41.7
- 3 England Kingston upon Hu…       29816      70650               42.2
- 4 Wales   Blaenau Gwent an…       29922      70153               42.7
- 5 England Tipton and Wedne…       31850      74098               43.0
- 6 England Wolverhampton So…       33382      77473               43.1
- 7 England Blackley and Mid…       31340      72303               43.3
- 8 England Birmingham Ladyw…       36579      83693               43.7
- 9 England Birmingham Hodge…       34136      77737               43.9
-10 England Birmingham Erdin…       34137      77463               44.1</code></pre>
-</div>
-<h1 id="step-7-turnout-by-constituent-countries-of-the-uk">Step 7: Turnout by Constituent Countries of the UK</h1>
-<h1 id="country-summary-mean-median-n-ordered-by-mean-turnout">1) Country summary (mean, median, n), ordered by mean turnout</h1>
+<p>Now that we have the smallest and the largest, I calculate the ratio between largest and smallest</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>turnout_by_country</span> <span class='op'>&lt;-</span> <span class='va'>uk</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>country</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span></span>
-<span>    mean_turnout   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>turnout_registered</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,</span>
-<span>    median_turnout <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/median.html'>median</a></span><span class='op'>(</span><span class='va'>turnout_registered</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,</span>
-<span>    n              <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
-<span>    .groups <span class='op'>=</span> <span class='st'>"drop"</span></span>
-<span>  <span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>mean_turnout</span><span class='op'>)</span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>biggest_value</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>uk</span><span class='op'>$</span><span class='va'>valid_votes</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>       <span class='co'># largest value</span></span>
+<span><span class='va'>smallest_value</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span><span class='op'>(</span><span class='va'>uk</span><span class='op'>$</span><span class='va'>valid_votes</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>      <span class='co'># smallest value</span></span>
 <span></span>
-<span><span class='va'>turnout_by_country</span></span></code></pre>
+<span><span class='va'>ratio</span> <span class='op'>&lt;-</span> <span class='va'>biggest_value</span> <span class='op'>/</span> <span class='va'>smallest_value</span></span>
+<span><span class='va'>ratio</span></span></code></pre>
 </div>
-<pre><code># A tibble: 4 × 4
-  country          mean_turnout median_turnout     n
-  &lt;chr&gt;                   &lt;dbl&gt;          &lt;dbl&gt; &lt;int&gt;
-1 England                  60.1           60.7   543
-2 Scotland                 59.2           58.6    57
-3 Northern Ireland         57.1           58.2    18
-4 Wales                    56.2           56.8    32</code></pre>
+<pre><code>[1] 4.26848</code></pre>
 </div>
-<p>#Data Visualisation</p>
+The ratio tells us how many times larger the biggest constituency is compared to the smallest.
+To find out the answer, we print the variable ratio. The code used is:
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>turnout_by_country</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>country</span>, <span class='va'>mean_turnout</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>width <span class='op'>=</span> <span class='fl'>0.7</span>, fill <span class='op'>=</span> <span class='st'>"#0072B2"</span><span class='op'>)</span> <span class='op'>+</span>  <span class='co'># bar = mean turnout</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span>limits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>100</span><span class='op'>)</span>,</span>
-<span>                     expand <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/expansion.html'>expansion</a></span><span class='op'>(</span>mult <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0.05</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>biggest_value</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>uk</span><span class='op'>$</span><span class='va'>valid_votes</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span><span class='va'>smallest_value</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span><span class='op'>(</span><span class='va'>uk</span><span class='op'>$</span><span class='va'>valid_votes</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span><span class='va'>ratio</span> <span class='op'>&lt;-</span> <span class='va'>biggest_value</span> <span class='op'>/</span> <span class='va'>smallest_value</span></span>
+<span></span>
+<span><span class='va'>ratio</span></span></code></pre>
+</div>
+<pre><code>[1] 4.26848</code></pre>
+</div>
+<p>And the answer is 4.26848</p>
+<span style="color: red;">Question:</span> What is the range of constituency size? What about the variance? How might you have a look at this or calculate it? Is the fact that constituencies vary so much in terms of numbers of voters fair? Why or why not?
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>range_electorate</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span><span class='op'>(</span><span class='va'>uk</span><span class='op'>$</span><span class='va'>electorate</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span><span class='va'>range_electorate</span></span></code></pre>
+</div>
+<pre><code>[1] 21325 85204</code></pre>
+</div>
+Range = 21325 - 85204
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>var_electorate</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>var</a></span><span class='op'>(</span><span class='va'>uk</span><span class='op'>$</span><span class='va'>electorate</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span><span class='va'>var_electorate</span></span></code></pre>
+</div>
+<pre><code>[1] 18541899</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>uk</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>electorate</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span>bins <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Distribution of Constituency Electorate"</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="Works_files/figure-html5/Variance_graph-1.png" width="768" /></p>
+</div>
+<p>Variance = 18541899 + data shown from the graph</p>
+<p>Constituencies ideally should be roughly equal in size so that each person’s vote carries similar weight. When constituency sizes vary widely, voters in smaller constituencies have proportionally more influence than voters in large ones. This creates an imbalance in political representation. Large variation therefore raises issues of fairness, because it violates the democratic principle of “one person, one vote.”
+On the other hand, some variation is unavoidable due to geography, population density, and community boundaries. But when the differences are very large, it can be considered unfair or undemocratic.</p>
+<p>The first thing that we could do is calculate the overall mean for the reference line.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>overall_mean</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>uk</span><span class='op'>$</span><span class='va'>valid_votes</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>uk</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>valid_votes</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span>bins <span class='op'>=</span> <span class='fl'>30</span>, fill <span class='op'>=</span> <span class='st'>"steelblue"</span>, alpha <span class='op'>=</span> <span class='fl'>0.7</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span><span class='op'>(</span>xintercept <span class='op'>=</span> <span class='va'>overall_mean</span>, </span>
+<span>             color <span class='op'>=</span> <span class='st'>"red"</span>, linetype <span class='op'>=</span> <span class='st'>"dashed"</span>, linewidth <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span> <span class='va'>country</span>, ncol <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
-<span>    title <span class='op'>=</span> <span class='st'>"UK 2024 General Election: Mean Turnout by Country"</span>,</span>
-<span>    x <span class='op'>=</span> <span class='st'>"Country"</span>,</span>
-<span>    y <span class='op'>=</span> <span class='st'>"Turnout (% of registered voters)"</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Distribution of Constituency Sizes by Country"</span>,</span>
+<span>    subtitle <span class='op'>=</span> <span class='st'>"Red line shows overall UK mean"</span>,</span>
+<span>    x <span class='op'>=</span> <span class='st'>"Number of Valid Votes"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Count of Constituencies"</span></span>
 <span>  <span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_classic</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span></span>
+<span>    plot.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>face <span class='op'>=</span> <span class='st'>"bold"</span>, size <span class='op'>=</span> <span class='fl'>14</span><span class='op'>)</span>,</span>
+<span>    strip.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>face <span class='op'>=</span> <span class='st'>"bold"</span><span class='op'>)</span></span>
+<span>  <span class='op'>)</span></span></code></pre>
 </div>
-<p><img src="gv300-showcase_files/figure-html5/unnamed-chunk-8-1.png" width="624" /></p>
+<p><img src="Works_files/figure-html5/plot1-1.png" width="768" /></p>
 </div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Improved plot: Boxplot + points + mean line</span></span>
+<span><span class='va'>uk</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>country</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>mean_votes_country <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>valid_votes</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>country</span>, y <span class='op'>=</span> <span class='va'>valid_votes</span>, fill <span class='op'>=</span> <span class='va'>country</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_boxplot.html'>geom_boxplot</a></span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>0.5</span>, outlier.shape <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span> <span class='op'>+</span>   <span class='co'># Boxplot without extreme outliers</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_jitter.html'>geom_jitter</a></span><span class='op'>(</span>width <span class='op'>=</span> <span class='fl'>0.2</span>, alpha <span class='op'>=</span> <span class='fl'>0.6</span>, size <span class='op'>=</span> <span class='fl'>1.5</span><span class='op'>)</span> <span class='op'>+</span> <span class='co'># Add points for each constituency</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_hline</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>yintercept <span class='op'>=</span> <span class='va'>mean_votes_country</span><span class='op'>)</span>, linetype <span class='op'>=</span> <span class='st'>"dashed"</span>, color <span class='op'>=</span> <span class='st'>"red"</span><span class='op'>)</span> <span class='op'>+</span> <span class='co'># Mean line</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Variation in Constituency Sizes by Country"</span>,</span>
+<span>    subtitle <span class='op'>=</span> <span class='st'>"Red dashed line shows country mean; points show individual constituencies"</span>,</span>
+<span>    x <span class='op'>=</span> <span class='st'>"Country"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Number of Valid Votes"</span>,</span>
+<span>    fill <span class='op'>=</span> <span class='st'>"Country"</span></span>
+<span>  <span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span></span>
+<span>    plot.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>face <span class='op'>=</span> <span class='st'>"bold"</span>, size <span class='op'>=</span> <span class='fl'>14</span><span class='op'>)</span>,</span>
+<span>    plot.subtitle <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>11</span><span class='op'>)</span>,</span>
+<span>    legend.position <span class='op'>=</span> <span class='st'>"none"</span></span>
+<span>  <span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="Works_files/figure-html5/constituency_variation2-1.png" width="768" /></p>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
