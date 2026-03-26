@@ -20,6 +20,7 @@ library(tidyverse)
 
 #2024 UK General Election — candidate-level CSV (has electorate & valid votes)
 #Linked from the official 2024 results page (“Download the full data set”).
+#See link below
 
 uk_csv <- "https://electionresults.parliament.uk/general-elections/6/candidacies.csv"
 uk_raw <- readr::read_csv(uk_csv, show_col_types = FALSE)
