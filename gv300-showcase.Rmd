@@ -1,8 +1,6 @@
 ---
 title: "gv300-Showcase"
-author: "Jed Cooper"
-date: "2026-02-17"
-output: html_document
+
 ---
 
 ```{r setup, include=FALSE}

@@ -9,4 +9,6 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
+    - text: "gv300-showcase"
+      href: gv300-showcase.html
 output: distill::distill_article
