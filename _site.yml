@@ -1,7 +1,7 @@
 name: "Jed Cooper"
-title: "mfeo"
+title: "Jed Cooper's Page"
 description: |
-  mfeo
+  I am a 3rd year BSc Politics & International Relations student whoe completed a placement year within Asset Management, based in Suffolk.
 output_dir: "docs"
 navbar:
   right:
@@ -9,6 +9,6 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
-    - text: "gv300-showcase"
+    - text: "gv300-Showcase"
       href: gv300-showcase.html
 output: distill::distill_article
